@@ -12,24 +12,15 @@ public class Lector {
     private BufferedReader lector;
     private String linea;
     private String partes[]=null;
-/*
-    public ABB cargarArbol(){
-        ABB arbolBB = new ABB();
-        try{
-            lector=new BufferedReader(new FileReader("puertos2.csv"));
-            while((linea = lector.readLine())!=null){
-                partes = linea.split(",");
-                arbolBB.insertar(new Puerto(partes));
-            }
-            lector.close();
-            linea=null;
-            partes=null;
-        }catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        return arbolBB;
+
+    public Grafo cargarGrafo(){
+    	Grafo grafo = new Grafo();
+    	cargarVertices(grafo);
+    	cargarAristas(grafo);
+    	return grafo;
     }
-*/
+    
+    //Método para cargar el grafo desde un csv
     private void cargarVertices(Grafo grafo){
         try{
             lector=new BufferedReader(new FileReader("Puertos2.csv"));
@@ -45,6 +36,7 @@ public class Lector {
         }
     }
 
+  //Método para cargar las aristas desde un csv
     private void cargarAristas(Grafo grafo){
         try{
             lector=new BufferedReader(new FileReader("viajes2.csv"));
@@ -60,12 +52,6 @@ public class Lector {
         }
     }
 
-    public Grafo cargarGrafo(){
-        Grafo grafo = new Grafo();
-        cargarVertices(grafo);
-        cargarAristas(grafo);
-        return grafo;
-    }
 
     public void imprimirLinea(){
         for (int i=0; i< partes.length; i++){
