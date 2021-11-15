@@ -7,20 +7,29 @@ import Viajes.Viaje;
 public class Ejecutable {
 
     public static void main(String[] args) {
+    	//creamos un lector y cargamos el grafo
         Lector lector = new Lector();
         Grafo grafo = lector.cargarGrafo();
-        grafo.dijkstra(1);
+        
+        //imprimimos el grafo
         grafo.imprimir();
         
+        //Buscamos los caminos mínimos desde el puerto 1 (Buenos Aires)
+        grafo.dijkstra(1);
+        
+        //creamos un puerto y lo agregamos al grafo
          Puerto Pu = new Puerto(714, "Lima", "Peru");
          grafo.agregarVertice(Pu);
          
+       //creamos un viaje y lo agregamos al grafo
          Viaje Vi = new Viaje(1, "Buenos Aires", 6, 13000);
          
          grafo.agregarArista(714, Vi);
          System.out.println("*******************************************");
          System.out.println("");
          grafo.imprimir();
+         
+         //probamos con otro punto de partida
          grafo.dijkstra(3);
     }
 }

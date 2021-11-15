@@ -53,6 +53,7 @@ public class Lector {
     }
 
 
+    //Método de prueba de la lectura del csv
     public void imprimirLinea(){
         for (int i=0; i< partes.length; i++){
             System.out.print(partes[i]+"   |   ");
