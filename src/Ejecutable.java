@@ -20,7 +20,8 @@ public class Ejecutable {
         //creamos un puerto y lo agregamos al grafo
          Puerto Pu = new Puerto(714, "Lima", "Peru");
          grafo.agregarVertice(Pu);
-         
+         Puerto Pue = new Puerto(74, "cuzco", "Peru");
+         grafo.agregarVertice(Pue);
        //creamos un viaje y lo agregamos al grafo
          Viaje Vi = new Viaje(1, "Buenos Aires", 6, 13000);
          
@@ -31,6 +32,17 @@ public class Ejecutable {
          
          //probamos con otro punto de partida
          grafo.dijkstra(3);
+         System.out.println("*******************************************");
+         System.out.println("");
+         
+         //imprimimos todos los puertos
+         grafo.imprimirPuertos();
+         
+         System.out.println("**************");
+         //Imprimimos el puerto con código 3
+         grafo.buscarPuerto(3);
+         
+         
     }
 }
 

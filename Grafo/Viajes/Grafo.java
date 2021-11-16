@@ -153,6 +153,21 @@ public class Grafo {
             iterar =  iterar + 1;
         }
     }
+	
+	//método para imprimr todos los puertos
+	public void imprimirPuertos() {
+		
+		for(int i=0; i< puertos.size();i++) {
+			System.out.println( puertos.get(i).getDato().toString());
+		}
+	}
+	
+	//método para buscar el puerto con el código que se pasa como argumento
+	public void buscarPuerto(int codigo) {
+		 NodoGrafo nodoABuscar = buscar(codigo);
+		 System.out.print("El puerto buscado es: " + nodoABuscar.getDato().toString() );
+		
+	}
 
 
 }
