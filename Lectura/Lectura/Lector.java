@@ -23,7 +23,7 @@ public class Lector {
     //Método para cargar el grafo desde un csv
     private void cargarVertices(Grafo grafo){
         try{
-            lector=new BufferedReader(new FileReader("puertos.csv"));
+            lector=new BufferedReader(new FileReader("Puertos2.csv"));
             while((linea = lector.readLine())!=null){
                 partes = linea.split(",");
                 grafo.agregarVertice(new Puerto(partes));

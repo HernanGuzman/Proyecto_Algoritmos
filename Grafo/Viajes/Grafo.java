@@ -19,7 +19,7 @@ public class Grafo {
     }
 
     // Método que dado un código, devuelve el nodoGrafo (puerto) con ese código
-    private NodoGrafo buscar(int codigo){
+    public NodoGrafo buscar(int codigo){
         NodoGrafo retornar = null;
         int iterar=0;
         while (iterar<puertos.size() && retornar == null){

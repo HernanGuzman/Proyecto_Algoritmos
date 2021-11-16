@@ -60,6 +60,10 @@ public class Menu {
 
 	public void IngresarPuerto() {
 		int codigo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el codigo del puerto del que desea agregar:"));
+		while(existePuertoCodigo(codigo)) {
+			 codigo = Integer.parseInt(JOptionPane.showInputDialog("El código del puerto ya existe"
+					+ "\nIngrese otro código del puerto del que desea agregar:"));
+		}
 		String nombre = (JOptionPane.showInputDialog("Ingrese el nombre del puerto"));
 		String pais = (JOptionPane.showInputDialog("Ingrese el pais del puerto:"));
 				
@@ -69,6 +73,10 @@ public class Menu {
         System.out.println("Puerto ingresado correctamente. Presione cualquier tecla para volver al menu");
         Scanner scVP = new Scanner(System.in);
         scVP.next();
+	}
+
+	private boolean existePuertoCodigo(int codigo) {
+		return (grafo.buscar(codigo)!=null);
 	}
 
 	public void IngresarViajeAPuerto() {
