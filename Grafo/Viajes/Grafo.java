@@ -1,5 +1,6 @@
 package Viajes;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -67,10 +68,11 @@ public class Grafo {
     	}
     }
     
-    public void BuscarCaminoMinimo (int codigo) {
+    public void BuscarCaminoMinimo (int codigoSalida,int codigoLlegada ) {
     	Distancias distancia = new Distancias(puertos.size());
     	distancia.Inicializar();
-    	int  PosNodo = BuscarPosicionNodoGrafo(codigo);
+    	int  PosNodo = BuscarPosicionNodoGrafo(codigoSalida);
+    	int posLlegada = BuscarPosicionNodoGrafo(codigoLlegada);
     	distancia.setDistancia(PosNodo, 0);
     	
     	//listar los adyacentes
@@ -81,26 +83,27 @@ public class Grafo {
     			distancia.setVisitado(j);
     		}
     	}
-    	ImprimrCaminosMasCortos(distancia, codigo);
+    	ImprimirCaminoMasCorto(distancia, codigoSalida, posLlegada);
     }
     
     
     //imprimimos los caminos más cortos
-    private void ImprimrCaminosMasCortos(Distancias distancia, int codigo) {
+    private void ImprimirCaminoMasCorto(Distancias distancia, int codigo, int posLlegada) {
 		NodoGrafo G = buscar(codigo);
-		System.out.println(" La distancia mas corta desde el puero " + G.getDato().getNombre() + " a:");
-		for(int j =0; j< puertos.size(); j++) {
-    		if(distancia.getValor(j) != 0) {
-    			//validamos para saber si llega o no a un puerto
-    			if(distancia.getValor(j) !=  999999999) {
-    				System.out.println(puertos.get(j).getDato().getNombre() + " es: " + distancia.getValor(j));
-    			}
-    			else {
-    				System.out.println(puertos.get(j).getDato().getNombre() + " no es posible.");
+		NodoGrafo llegada = buscar(posLlegada);
+		
+		if(distancia.getValor(posLlegada) != 999999999) {
+			//validamos para saber si llega o no a un puerto
+			System.out.println("La distancia más corta desde el puerto " + 
+					G.getDato().getNombre() + " a "+ llegada.getDato().getNombre() + " es: "
+							+ distancia.getValor(posLlegada));
+		}else {
+    		System.out.println("No existe el jiave de " + 
+					G.getDato().getNombre() + " a "+ llegada.getDato().getNombre());
     			}
     			
-    		}
-    	}
+    		
+    
 		
 	}
 
@@ -156,7 +159,9 @@ public class Grafo {
 	
 	//método para imprimr todos los puertos
 	public void imprimirPuertos() {
-		
+		//primero oredenamos por código 
+		ordenarPorCodigo();
+		//luego recorro el array ordenado
 		for(int i=0; i< puertos.size();i++) {
 			System.out.println( puertos.get(i).getDato().toString());
 		}
@@ -191,6 +196,11 @@ public class Grafo {
 		 }
 		 
 		
+	}
+	
+	public void ordenarPorCodigo() {
+		Collections.sort(puertos, new CompararPuertos()); 
+				
 	}
 	
 	

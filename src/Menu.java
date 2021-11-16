@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import Viajes.Grafo;
 import Viajes.Puerto;
 import Viajes.Viaje;
@@ -13,66 +15,60 @@ public class Menu {
 	}
 	
 	public int MenuPrincipal() {
-		Scanner sc = new Scanner(System.in);
+		
+		//Scanner sc = new Scanner(System.in);
     	//MENU
-    	System.out.println("*****************BIENVENIDO AL SISTEMA DE PUERTOS**************************");
-    	System.out.println("");
-    	System.out.println("Por favor seleccione alguna opcion del menu");
-    	System.out.println("1_ Listado de Puertos");
-    	System.out.println("2_ Listado de Viajes por Puerto");
-    	System.out.println("3_ Camino minimo desde un Puerto");
-    	System.out.println("4_ Ingresar un Puerto");
-    	System.out.println("5_ Ingresar un Viaje a un Puerto");
-    	System.out.println("6_ Salir del sistema");
-    	int opcion = sc.nextInt();
-    	System.out.println(opcion);
-    	return opcion;
+		int valor = Integer.parseInt(JOptionPane.showInputDialog("Bienvenido al sistema de puertos"
+				+ "\n Por favor seleccione alguna opcion del menu"
+				+ "\n 1_ Listado de Puertos"
+				+ "\n 2_ Listado de Viajes por Puerto"
+				+ "\n 3_ Camino minimo desde un Puerto a otro"
+				+ "\n 4_ Ingresar un Puerto"
+				+ "\n 5_ Ingresar un Viaje a un Puerto"
+				+ "\n 6_ Salir del sistema"
+				));
+		
+    	return valor;
 	}
 	
 	public void ListarPuertos() {
-		//Scanner scLP = new Scanner(System.in);
 		grafo.imprimirPuertos();
-		//System.out.println("");
-		//System.out.println("Presione cualquier tecla para volver al menu");
-		//scLP.next();
-		
+		Scanner scVP = new Scanner(System.in);
+		System.out.println("Presione cualquier tecla para volver al menu");
+		scVP.next();			
 	}
 	
 	public void ListarViajesDePuerto() {
+		int valor = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el código del puerto del que desea saber sus viajes"));
+		grafo.listarViajesPuerto(valor);
 		Scanner scVP = new Scanner(System.in);
-		System.out.println("");
-		System.out.println("Ingrese el codigo del puerto del que desea saber sus viajes");
-		grafo.listarViajesPuerto(scVP.nextInt());
 		System.out.println("Presione cualquier tecla para volver al menu");
 		scVP.next();
+		
 		
 	}
 
 	public void MostrarCaminoMinimo() {
+		int inicio = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el código del puerto del que desea salir"));
+		int llegada = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el código del puerto al que desea llegar"));
+		grafo.BuscarCaminoMinimo(inicio, llegada);
 		Scanner scVP = new Scanner(System.in);
-		System.out.println("");
-		System.out.println("Ingrese el codigo del puerto del que desea saber el camino minimo");
-		grafo.BuscarCaminoMinimo(scVP.nextInt());
 		System.out.println("Presione cualquier tecla para volver al menu");
 		scVP.next();
-		
+	
 	}
 
 	public void IngresarPuerto() {
-		Scanner scVP = new Scanner(System.in);
-		Scanner scVPSal = new Scanner(System.in);
-		Scanner scVPS = new Scanner(System.in);
-		System.out.println("");
-		System.out.println("Ingrese el codigo del puerto del que desea agregar:");
-		int codPuerto = scVP.nextInt();
-		System.out.println("Ingrese el nombre del puerto:");
-		String nomPuerto = scVPS.nextLine();
-		System.out.println("Ingrese el pais del puerto:");
-		String paisPuerto = scVPS.nextLine();
-		Puerto Pu = new Puerto(codPuerto, nomPuerto, paisPuerto);
+		int codigo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el codigo del puerto del que desea agregar:"));
+		String nombre = (JOptionPane.showInputDialog("Ingrese el nombre del puerto"));
+		String pais = (JOptionPane.showInputDialog("Ingrese el pais del puerto:"));
+				
+		
+		Puerto Pu = new Puerto(codigo, nombre, pais);
         grafo.agregarVertice(Pu);
         System.out.println("Puerto ingresado correctamente. Presione cualquier tecla para volver al menu");
-        scVPSal.next();
+        Scanner scVP = new Scanner(System.in);
+        scVP.next();
 	}
 
 	public void IngresarViajeAPuerto() {

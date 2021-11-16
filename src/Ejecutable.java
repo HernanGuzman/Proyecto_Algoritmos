@@ -20,6 +20,7 @@ public class Ejecutable {
     	Menu M = new Menu(grafo);
     	int opcion = M.MenuPrincipal();
     	
+    	
     	while(opcion != 6) {
     		if(opcion == 1) {
     			M.ListarPuertos();
@@ -28,7 +29,7 @@ public class Ejecutable {
     			M.ListarViajesDePuerto();
     		}
     		else if(opcion == 3) {
-    			M.IngresarPuerto();
+    			M.MostrarCaminoMinimo();
     		}
     		else if(opcion == 4) {
     			M.IngresarPuerto();
