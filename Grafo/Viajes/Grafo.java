@@ -67,7 +67,7 @@ public class Grafo {
     	}
     }
     
-    public void dijkstra (int codigo) {
+    public void BuscarCaminoMinimo (int codigo) {
     	Distancias distancia = new Distancias(puertos.size());
     	distancia.Inicializar();
     	int  PosNodo = BuscarPosicionNodoGrafo(codigo);
@@ -168,6 +168,32 @@ public class Grafo {
 		 System.out.print("El puerto buscado es: " + nodoABuscar.getDato().toString() );
 		
 	}
+	
+	public void listarViajesPuerto(int codigo) {
+		 NodoGrafo nodoABuscar = buscar(codigo);
+		 if(nodoABuscar.getAdyacentes().size() > 0) {
+			 System.out.print("Los viajes que salen desde el Puerto " + nodoABuscar.getDato().getCodigo() + " " +
+		     nodoABuscar.getDato().getNombre() + " son:  \n");
+			 for(int i = 0; i < nodoABuscar.getAdyacentes().size(); i++) {
+				 System.out.print( "Cod. Puerto Destino: " + nodoABuscar.getAdyacentes().get(i).getCodigoDest() + "\n");
+				 //BUSCO EL PUERTO PARA SABER EL NOMBRE
+				 NodoGrafo nodoDestino = buscar(nodoABuscar.getAdyacentes().get(i).getCodigoDest());
+				 System.out.print( "Nombre Puerto Destino: " + nodoDestino.getDato().getNombre()+ "\n");
+				 System.out.print( "Costo: " + nodoABuscar.getAdyacentes().get(i).getCosto()+ "\n");
+				 System.out.print( "Dias de viaje: " + nodoABuscar.getAdyacentes().get(i).getDiasViaje()+ "\n");
+				 System.out.print("\n");
+				 
+				 
+			 }
+		 }else {
+			 System.out.print( "No existen viajes para el puerto " + nodoABuscar.getDato().getCodigo() + " " +
+				     nodoABuscar.getDato().getNombre());
+		 }
+		 
+		
+	}
+	
+	
 
 
 }
