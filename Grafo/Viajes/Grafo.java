@@ -121,7 +121,8 @@ public class Grafo {
     
 		
 	}
-
+    
+   
 	public void eliminarPuerto(int codigo) {
     	//Primero eliminamos las aristas que tienen como destino el puerto
     	EliminarAristasDestino(codigo);

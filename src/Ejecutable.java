@@ -23,7 +23,7 @@ public class Ejecutable {
     	int opcion = M.MenuPrincipal();
     	
     	
-    	while(opcion != 6) {
+    	while(opcion != 7) {
     		if(opcion == 1) {
     			M.ListarPuertos();
     		}
@@ -38,6 +38,9 @@ public class Ejecutable {
     		}
     		else if(opcion == 5) {
     			M.IngresarViajeAPuerto();
+    		}
+    		else if(opcion == 6) {
+    			M.eliminarPuerto();
     		}
     		
     		opcion = M.MenuPrincipal();

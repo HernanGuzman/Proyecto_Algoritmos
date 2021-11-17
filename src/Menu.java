@@ -25,7 +25,8 @@ public class Menu {
 				+ "\n 3_ Camino minimo desde un Puerto a otro"
 				+ "\n 4_ Ingresar un Puerto"
 				+ "\n 5_ Ingresar un Viaje a un Puerto"
-				+ "\n 6_ Salir del sistema"
+				+ "\n 6_ Eliminar puerto"
+				+ "\n 7_ Salir del sistema"
 				));
 		
     	return valor;
@@ -33,18 +34,16 @@ public class Menu {
 	
 	public void ListarPuertos() {
 		grafo.imprimirPuertos();
-		Scanner scVP = new Scanner(System.in);
-		System.out.println("Presione cualquier tecla para volver al menu");
-		scVP.next();			
+		JOptionPane.showMessageDialog(null,"Continuar");
+		System.out.println(" ");
+					
 	}
 	
 	public void ListarViajesDePuerto() {
 		int valor = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el código del puerto del que desea saber sus viajes"));
 		grafo.listarViajesPuerto(valor);
-		Scanner scVP = new Scanner(System.in);
-		System.out.println("Presione cualquier tecla para volver al menu");
-		scVP.next();
-		
+		JOptionPane.showMessageDialog(null,"Continuar");
+		System.out.println(" ");
 		
 	}
 
@@ -56,9 +55,8 @@ public class Menu {
 				+ "\n 2_ Duracion del viaje"
 				));
 		grafo.BuscarCaminoMinimo(inicio, llegada, comparacion);
-		Scanner scVP = new Scanner(System.in);
-		System.out.println("Presione cualquier tecla para volver al menu");
-		scVP.next();
+		JOptionPane.showMessageDialog(null,"Continuar");
+		System.out.println(" ");
 	
 	}
 
@@ -74,9 +72,9 @@ public class Menu {
 		
 		Puerto Pu = new Puerto(codigo, nombre, pais);
         grafo.agregarVertice(Pu);
-        System.out.println("Puerto ingresado correctamente. Presione cualquier tecla para volver al menu");
-        Scanner scVP = new Scanner(System.in);
-        scVP.next();
+        JOptionPane.showMessageDialog(null,"Puerto ingresado correctamente.");
+        System.out.println(" ");
+      
 	}
 
 	private boolean existePuertoCodigo(int codigo) {
@@ -84,28 +82,44 @@ public class Menu {
 	}
 
 	public void IngresarViajeAPuerto() {
-		Scanner scVP = new Scanner(System.in);
-		Scanner scVPD = new Scanner(System.in);
-		System.out.println("");
-		System.out.println("Ingrese el codigo del puerto de origen:");
-		int codPuertoOrigen = scVP.nextInt();
-		System.out.println("Ingrese el codigo del puerto de destino:");
-		int codPuertoDestino = scVP.nextInt();
-		System.out.println("Ingrese el nombre del puerto de destino:");
-		String nombPuertoDestino = scVPD.nextLine();
-		System.out.println("Ingrese los dias de viaje al puerto de destino");
-		int diasViaje = scVP.nextInt();
-		System.out.println("Ingrese el costo del viaje al puerto de destino");
-		int costoViaje = scVP.nextInt();
+		
+		int codigo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el código del puerto de origen:"));
+		
+		//Validamos que exista el código
+		while(!existePuertoCodigo(codigo)) {
+			 codigo = Integer.parseInt(JOptionPane.showInputDialog("El código del puerto de origen no existe"
+					+ "\nIngrese otro código del puerto de origen:"));
+		}
+		
+		String nombre = (JOptionPane.showInputDialog("Ingrese el nombre del puerto de destino:"));
+		int diasViaje =Integer.parseInt(JOptionPane.showInputDialog("Ingrese los días de viaje al puerto de destino"));
+		
+		
+		int costoViaje =Integer.parseInt(JOptionPane.showInputDialog("Ingrese el costo del viaje"));
 		
 		//creamos un viaje y lo agregamos al grafo
-        Viaje Vi = new Viaje(codPuertoDestino, nombPuertoDestino, diasViaje, costoViaje);
+        Viaje Vi = new Viaje(codigo, nombre, diasViaje, costoViaje);
         
-        grafo.agregarArista(codPuertoOrigen, Vi);
-        System.out.println("Viaje ingresado correctamente. Presione cualquier tecla para volver al menu");
-        scVP.next();
+        grafo.agregarArista(codigo, Vi);
+        JOptionPane.showMessageDialog(null,"Viaje ingresado correctamente.");
+        System.out.println(" ");
+       
 		
 	}
+	 public void eliminarPuerto() {
+		 int codigo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el codigo del puerto que desea eliminar:"));
+			while(!existePuertoCodigo(codigo)) {
+				 codigo = Integer.parseInt(JOptionPane.showInputDialog("El código del puerto no existe"
+						+ "\nIngrese otro código del puerto a eliminar:"));
+			}
+			
+	        grafo.eliminarPuerto(codigo);
+	        JOptionPane.showMessageDialog(null,"Puerto eliminado correctamente.");
+	        System.out.println(" ");
+		
+	    	
+	    }
+
 	
 
 }
