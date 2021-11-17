@@ -51,7 +51,11 @@ public class Menu {
 	public void MostrarCaminoMinimo() {
 		int inicio = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el código del puerto del que desea salir"));
 		int llegada = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el código del puerto al que desea llegar"));
-		grafo.BuscarCaminoMinimo(inicio, llegada);
+		int comparacion = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el tipo por el que desea buscar el camino minimo"
+				+ "\n 1_ Costo"
+				+ "\n 2_ Duracion del viaje"
+				));
+		grafo.BuscarCaminoMinimo(inicio, llegada, comparacion);
 		Scanner scVP = new Scanner(System.in);
 		System.out.println("Presione cualquier tecla para volver al menu");
 		scVP.next();

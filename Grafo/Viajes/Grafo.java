@@ -54,7 +54,7 @@ public class Grafo {
     }
     
     //Método para recorrer los puerto
-    public void recorrerAdyacentes(int PosNodo, Distancias distancias) {
+    public void recorrerAdyacentes(int PosNodo, Distancias distancias, int tipoComparacion) {
     	//guardamos el nodo de la posición
     	NodoGrafo Nodo = puertos.get(PosNodo);
     	//recorremos los adyacentes de el nodo guardado
@@ -63,12 +63,19 @@ public class Grafo {
     		Viaje viaje = Nodo.getAdyacentes().get(i);
     		//buscamos la posición del viaje
     		int  PosViaje = BuscarPosicionNodoGrafo(viaje.getCodigoDest());
-    		//seteamos en la posisión, lo que el peso que ya tenía más el valor del costo
-    		distancias.setDistancia(PosViaje, ( distancias.getValor(PosNodo)+ viaje.getCosto()));
+    		if(tipoComparacion == 1) {
+    			//seteamos en la posisión, lo que el peso que ya tenía más el valor del costo
+        		distancias.setDistancia(PosViaje, ( distancias.getValor(PosNodo)+ viaje.getCosto()));
+    		}
+    		else {
+    			//seteamos en la posisión, lo que el peso que ya tenía más el valor del dia de viaje
+        		distancias.setDistancia(PosViaje, ( distancias.getValor(PosNodo)+ viaje.getDiasViaje()));
+    		}
+    		
     	}
     }
     
-    public void BuscarCaminoMinimo (int codigoSalida,int codigoLlegada ) {
+    public void BuscarCaminoMinimo (int codigoSalida,int codigoLlegada, int tipoComparacion ) {
     	Distancias distancia = new Distancias(puertos.size());
     	distancia.Inicializar();
     	int  PosNodo = BuscarPosicionNodoGrafo(codigoSalida);
@@ -79,26 +86,34 @@ public class Grafo {
     	for(int j =0; j< puertos.size(); j++) {
     		//VALIDAR SI FUE VISITADO
     		if(!distancia.getVisitado(j)) {
-    			recorrerAdyacentes(j, distancia);
+    			recorrerAdyacentes(j, distancia, tipoComparacion);
     			distancia.setVisitado(j);
     		}
     	}
-    	ImprimirCaminoMasCorto(distancia, codigoSalida, posLlegada);
+    	ImprimirCaminoMasCorto(distancia, codigoSalida, posLlegada, tipoComparacion);
     }
     
     
     //imprimimos los caminos más cortos
-    private void ImprimirCaminoMasCorto(Distancias distancia, int codigo, int posLlegada) {
+    private void ImprimirCaminoMasCorto(Distancias distancia, int codigo, int posLlegada, int tipoComparacion) {
 		NodoGrafo G = buscar(codigo);
 		NodoGrafo llegada = buscar(posLlegada);
 		
 		if(distancia.getValor(posLlegada) != 999999999) {
 			//validamos para saber si llega o no a un puerto
-			System.out.println("La distancia más corta desde el puerto " + 
-					G.getDato().getNombre() + " a "+ llegada.getDato().getNombre() + " es: "
-							+ distancia.getValor(posLlegada));
+			if(tipoComparacion == 1) {
+				System.out.println("El costo más bajo desde el puerto " + 
+						G.getDato().getNombre() + " a "+ llegada.getDato().getNombre() + " es: "
+								+ distancia.getValor(posLlegada)+" pesos");
+			}
+			else {
+				System.out.println("La distancia más corta desde el puerto " + 
+						G.getDato().getNombre() + " a "+ llegada.getDato().getNombre() + " es: "
+								+ distancia.getValor(posLlegada) + " dias");
+			}
+			
 		}else {
-    		System.out.println("No existe el jiave de " + 
+    		System.out.println("No existe el viaje de " + 
 					G.getDato().getNombre() + " a "+ llegada.getDato().getNombre());
     			}
     			
