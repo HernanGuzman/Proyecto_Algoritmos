@@ -24,25 +24,29 @@ public class Ejecutable {
     	
     	
     	while(opcion != 7) {
-    		if(opcion == 1) {
-    			M.ListarPuertos();
-    		}
-    		else if(opcion == 2) {
-    			M.ListarViajesDePuerto();
-    		}
-    		else if(opcion == 3) {
-    			M.MostrarCaminoMinimo();
-    		}
-    		else if(opcion == 4) {
-    			M.IngresarPuerto();
-    		}
-    		else if(opcion == 5) {
-    			M.IngresarViajeAPuerto();
-    		}
-    		else if(opcion == 6) {
-    			M.eliminarPuerto();
-    		}
     		
+    		switch(opcion) {
+    			case 1:
+    				M.ListarPuertos();
+    				break;
+    			case 2:
+        			M.ListarViajesDePuerto();
+        			break;
+    			case 3:
+    				M.MostrarCaminoMinimo();
+        			break;
+    			case 4:
+    				M.IngresarPuerto();
+        			break;
+    			case 5:
+    				M.IngresarViajeAPuerto();
+        			break;
+    			case 6:
+    				M.eliminarPuerto();
+        			break;
+    			}
+    		
+		
     		opcion = M.MenuPrincipal();
     	}
     	JOptionPane.showMessageDialog(null, "Muchas gracias por utilizar el sistema. Saludos!!!");

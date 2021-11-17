@@ -82,12 +82,12 @@ public class Menu {
 	}
 
 	public void IngresarViajeAPuerto() {
-		
-		int codigo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el código del puerto de origen:"));
+		int codigoOrg = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el código del puerto de origen:"));
+		int codigoDest = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el código del puerto de destino:"));
 		
 		//Validamos que exista el código
-		while(!existePuertoCodigo(codigo)) {
-			 codigo = Integer.parseInt(JOptionPane.showInputDialog("El código del puerto de origen no existe"
+		while(!existePuertoCodigo(codigoOrg)) {
+			codigoOrg = Integer.parseInt(JOptionPane.showInputDialog("El código del puerto de origen no existe"
 					+ "\nIngrese otro código del puerto de origen:"));
 		}
 		
@@ -98,9 +98,9 @@ public class Menu {
 		int costoViaje =Integer.parseInt(JOptionPane.showInputDialog("Ingrese el costo del viaje"));
 		
 		//creamos un viaje y lo agregamos al grafo
-        Viaje Vi = new Viaje(codigo, nombre, diasViaje, costoViaje);
+        Viaje Vi = new Viaje(codigoDest, nombre, diasViaje, costoViaje);
         
-        grafo.agregarArista(codigo, Vi);
+        grafo.agregarArista(codigoOrg, Vi);
         JOptionPane.showMessageDialog(null,"Viaje ingresado correctamente.");
         System.out.println(" ");
        
